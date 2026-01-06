@@ -21,6 +21,32 @@
         };
     };
 
+    macros {
+        ctrl_alt_del: new_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&macro_press>,
+                <&kp LCTRL &kp LEFT_ALT &kp DEL>,
+                <&macro_release>,
+                <&kp LCTRL &kp LEFT_ALT &kp DEL>;
+
+            label = "NEW_MACRO";
+        };
+
+        alt_space: alt_space {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&macro_press>,
+                <&kp LEFT_ALT &kp SPACE>,
+                <&macro_release>,
+                <&kp LEFT_ALT &kp SPACE>;
+
+            label = "ALT_SPACE";
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -36,7 +62,7 @@
 &kp SQT         &kp N1  &kp N2  &kp N3        &kp N4     &kp N5                         &kp N6         &kp N7     &kp N8         &kp N9   &kp N0    &kp MINUS
 &kp TAB         &kp Q   &kp W   &kp E         &kp R      &kp T                          &kp Y          &kp U      &kp I          &kp O    &kp P     &kp EQUAL
 &kp LEFT_SHIFT  &kp A   &kp S   &kp D         &kp F      &kp G                          &kp H          &kp J      &kp K          &kp L    &kp SEMI  &kp SLASH
-&to 2           &kp Z   &kp X   &kp C         &kp V      &kp B    &kp SPACE    &to 1    &kp N          &kp M      &kp COMMA      &kp DOT  &kp LBKT  &kp RBKT
+&mo 2           &kp Z   &kp X   &kp C         &kp V      &kp B    &kp SPACE    &mo 1    &kp N          &kp M      &kp COMMA      &kp DOT  &kp LBKT  &kp RBKT
                                 &kp LEFT_ALT  &kp LCTRL  &kp ESC  &kp GRAVE    &kp DEL  &kp BACKSLASH  &kp ENTER  &kp BACKSPACE
             >;
 
@@ -52,11 +78,11 @@
             //                       |      |      |      |        |  |       |      |       |       |
 
             bindings = <
-&kp F12          &kp F1  &kp F2  &kp F3  &kp F4  &kp F5                           &kp F6       &kp F7     &kp F8     &kp F9     &kp F10   &kp F11
-&kp LEFT_WIN     &trans  &trans  &trans  &trans  &trans                           &trans       &trans     &trans     &trans     &trans    &kp MINUS
-&kp PRINTSCREEN  &trans  &trans  &trans  &trans  &trans                           &kp LEFT     &kp DOWN   &kp UP     &kp RIGHT  &trans    &trans
-&trans           &trans  &trans  &trans  &trans  &trans  &kp PAGE_UP      &trans  &kp KP_PLUS  &kp MINUS  &kp EQUAL  &kp LBKT   &kp RBKT  &kp RIGHT_SHIFT
-                                 &trans  &trans  &trans  &kp PAGE_DOWN    &trans  &trans       &kp INS    &trans
+&kp F12       &kp F1  &kp F2  &kp F3  &kp F4  &kp F5                               &kp F6       &kp F7     &kp F8     &kp F9     &kp F10          &kp F11
+&kp LEFT_WIN  &trans  &trans  &trans  &trans  &trans                               &trans       &trans     &trans     &trans     &kp PRINTSCREEN  &kp MINUS
+&trans        &trans  &trans  &trans  &trans  &trans                               &kp LEFT     &kp DOWN   &kp UP     &kp RIGHT  &trans           &trans
+&trans        &trans  &trans  &trans  &trans  &trans  &alt_space    &trans         &kp KP_PLUS  &kp MINUS  &kp EQUAL  &kp LBKT   &kp RBKT         &kp RIGHT_SHIFT
+                              &trans  &trans  &trans  &trans        &ctrl_alt_del  &trans       &kp INS    &trans
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
